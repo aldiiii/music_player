@@ -44,15 +44,13 @@ class _PlayerWidgetState extends State<PlayerWidget> {
   get _durationText => _duration?.toString()?.split('.')?.first ?? '';
   get _positionText => _position?.toString()?.split('.')?.first ?? '';
 
-  get _isPlayingThroughEarpiece =>
-      _playingRouteState == PlayingRouteState.earpiece;
-
   _PlayerWidgetState(this.url, this.mode);
 
   @override
   void initState() {
     super.initState();
     _initAudioPlayer();
+    _play();
   }
 
   @override
@@ -79,33 +77,35 @@ class _PlayerWidgetState extends State<PlayerWidget> {
               onPressed: _isPlaying ? () => _pause() : null,
               iconSize: 50.0,
               icon: Icon(Icons.skip_previous),
-              color: Colors.cyan,
+              color: Colors.grey[700],
             ),
-            IconButton(
-              onPressed: _isPlaying ? null : () => _play(),
-              iconSize: 50.0,
-              icon: Icon(Icons.play_arrow),
-              color: Colors.cyan,
-            ),
+            _isPlaying
+                ? IconButton(
+                    key: Key('pause_button'),
+                    onPressed: _isPlaying ? () => _pause() : null,
+                    iconSize: 50.0,
+                    icon: Icon(Icons.pause),
+                    color: Colors.grey[700],
+                  )
+                : IconButton(
+                    onPressed: _isPlaying ? null : () => _play(),
+                    iconSize: 50.0,
+                    icon: Icon(Icons.play_arrow),
+                    color: Colors.grey[700],
+                  ),
             IconButton(
               onPressed: _isPlaying ? () => _pause() : null,
               iconSize: 50.0,
               icon: Icon(Icons.skip_next),
-              color: Colors.cyan,
+              color: Colors.grey[700],
             ),
-            IconButton(
-              key: Key('pause_button'),
-              onPressed: _isPlaying ? () => _pause() : null,
-              iconSize: 50.0,
-              icon: Icon(Icons.pause),
-              color: Colors.cyan,
-            ),
+
             // IconButton(
             //   key: Key('stop_button'),
             //   onPressed: _isPlaying || _isPaused ? () => _stop() : null,
             //   iconSize: 50.0,
             //   icon: Icon(Icons.stop),
-            //   color: Colors.cyan,
+            //   color: Colors.grey[700],
             // ),
           ],
         ),
@@ -150,26 +150,6 @@ class _PlayerWidgetState extends State<PlayerWidget> {
 
     _durationSubscription = _audioPlayer.onDurationChanged.listen((duration) {
       setState(() => _duration = duration);
-
-      // TODO implemented for iOS, waiting for android impl
-      if (Theme.of(context).platform == TargetPlatform.iOS) {
-        // (Optional) listen for notification updates in the background
-        _audioPlayer.startHeadlessService();
-
-        // set at least title to see the notification bar on ios.
-        _audioPlayer.setNotification(
-          title: 'App Name',
-          artist: 'Artist or blank',
-          albumTitle: 'Name or blank',
-          imageUrl: 'url or blank',
-          // forwardSkipInterval: const Duration(seconds: 30), // default is 30s
-          // backwardSkipInterval: const Duration(seconds: 30), // default is 30s
-          duration: duration,
-          elapsedTime: Duration(seconds: 0),
-          hasNextTrack: true,
-          hasPreviousTrack: false,
-        );
-      }
     });
 
     _positionSubscription =
@@ -230,6 +210,10 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     _audioPlayer.setPlaybackRate(playbackRate: 1.0);
 
     return result;
+  }
+
+  Future _next() async {
+    setState(() => _playerState = PlayerState.stopped);
   }
 
   Future<int> _pause() async {

@@ -13,7 +13,11 @@ class ItunesRepository {
       {@required String artist, Map<String, dynamic> params}) async {
     await Future.delayed(Duration(seconds: 1));
 
-    final Map<String, dynamic> exampleParam = {"term": artist};
+    final Map<String, dynamic> exampleParam = {
+      "term": artist,
+      "media": "music",
+      "sort": "popularity",
+    };
 
     final response =
         await _client.get('/search', queryParameters: exampleParam);

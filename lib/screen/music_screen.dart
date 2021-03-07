@@ -4,6 +4,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_player/data/cubits/itunes/itunes_cubit.dart';
+import 'package:music_player/data/cubits/music_control/music_control_cubit.dart';
+import 'package:music_player/data/models/itunes_model.dart';
+import 'package:music_player/data/models/music_control_model.dart';
 import 'package:music_player/widgets/music_list.dart';
 import 'package:music_player/widgets/player_widget.dart';
 
@@ -24,6 +27,8 @@ class _MusicScreenState extends State<MusicScreen> {
   TextEditingController searchController = TextEditingController();
   // ItunesCubit itunesCubit = ItunesCubit();
   Timer _debounce;
+
+  String url;
 
   @override
   void initState() {
@@ -98,7 +103,20 @@ class _MusicScreenState extends State<MusicScreen> {
           },
         ),
       ),
-      bottomSheet: PlayerWidget(url: kUrl1),
+      bottomSheet: BlocListener<MusicControlCubit, MusicControlState>(
+        listener: (context, state) {
+          if (state is SelectedState) {
+            state.data.forEach((element) {
+              if (element.isSelected == true) {
+                setState(() {
+                  url = element.previewUrl;
+                });
+              }
+            });
+          }
+        },
+        child: url != null ? PlayerWidget(url: url) : SizedBox(),
+      ),
     );
   }
 }

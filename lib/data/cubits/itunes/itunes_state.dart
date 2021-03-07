@@ -21,6 +21,14 @@ class LoadedState extends ItunesState {
   List<Object> get props => [itunes];
 }
 
+// class SelectedState extends ItunesState {
+//   SelectedState(this.itunes);
+//   final Result itunes;
+
+//   @override
+//   List<Object> get props => [itunes];
+// }
+
 class FailureState extends ItunesState {
   final String errorMessage;
 
