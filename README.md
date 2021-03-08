@@ -3,7 +3,7 @@
 
 - Music Playlist
 - Simple Player Control
-- Searching music from [affiliate itunes apple](https://external-link.egnyte.com/?url=https%3A%2F%2Faffiliate.itunes.apple.com%2Fresources%2Fdocumentation%2Fitunes-store-web-service-search-api/)
+- Searching music Uses the [iTunes affiliate API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/)
 
 ## Plugins
 
