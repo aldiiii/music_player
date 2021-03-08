@@ -30,7 +30,6 @@ class ItunesModel {
 
 class Result {
   Result({
-    this.isSelected = false,
     this.wrapperType,
     this.kind,
     this.artistId,
@@ -65,8 +64,6 @@ class Result {
     this.collectionArtistId,
     this.collectionArtistName,
   });
-
-  bool isSelected;
   String wrapperType;
   String kind;
   int artistId;

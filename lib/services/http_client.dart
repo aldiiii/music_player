@@ -24,31 +24,7 @@ class HttpClientImpl implements HttpClient {
 
   void _initApiClient() {
     _dio..options.baseUrl = API.BASE_API;
-    // _dio.interceptors.add(
-    //   InterceptorsWrapper(
-    //     onRequest: (RequestOptions options) async {
-    //       if (options.queryParameters != null) {
-    //         print("queryParameters:");
-    //         options.queryParameters.forEach((k, v) => print('$k: $v'));
-    //       }
-    //       return options;
-    //     },
-    //     onResponse: (Response response) async {
-    //       print(
-    //           "<-- ${response.statusCode} ${(response.request != null ? (response.request.baseUrl + response.request.path) : 'URL')}");
-    //       print("Response: ${response.data}");
-    //       print("<-- END HTTP");
-    //       /// do logic
-
-    //       return response;
-    //     },
-    //     onError: (DioError e) async {
-    //       /// do logic
-
-    //       return e;
-    //     },
-    //   ),
-    // );
+    // do interceptor
   }
 
   @override
@@ -70,8 +46,6 @@ class HttpClientImpl implements HttpClient {
 
       return response.data;
     } on DioError catch (e) {
-      // print('[API Dio Helper - GET] Connection Exception => ' + e.message);
-
       if (e?.response?.data != null) throw Exception(e.response.data);
 
       throw Exception(e.message);
