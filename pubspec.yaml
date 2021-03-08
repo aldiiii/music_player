@@ -24,7 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  path_provider: ^1.5.1
   flutter_bloc: ^6.1.0
   equatable: ^1.2.6
   dio: ^3.0.10
