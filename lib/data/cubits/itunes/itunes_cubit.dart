@@ -25,8 +25,4 @@ class ItunesCubit extends Cubit<ItunesState> {
       emit(FailureState(e));
     }
   }
-
-  // void playMusic({@required Result itunes}) async {
-  //   emit(SelectedState(itunes));
-  // }
 }
