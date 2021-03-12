@@ -1,6 +1,7 @@
 # Music Player
 ## Features
 
+- Cubit State Management
 - Music Playlist
 - Simple Player Control
 - Searching music Uses the [iTunes affiliate API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/)
