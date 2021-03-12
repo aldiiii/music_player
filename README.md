@@ -9,7 +9,7 @@
 
 Music Player uses a number of open source projects to work properly:
 
-- [flutter_bloc] - Flutter Widgets that make it easy to implement the BLoC (Business Logic Component) design pattern. Built to be used with the bloc state management package.
+- [flutter_bloc] - The Cubit is a subset of the famous implementation of BLoC Pattern: bloclibrary.dev, it abandons the concept of Events and simplifies the way of emitting states.
 - [equatable] - A Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.
 - [dio] - A powerful Http client for Dart, which supports Interceptors, Global configuration, FormData, Request Cancellation, File downloading, Timeout etc.
 - [assets_audio_player] - Play music/audio stored in assets files (simultaneously) directly from Flutter (android / ios / web / macos).
